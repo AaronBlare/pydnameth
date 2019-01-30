@@ -19,5 +19,5 @@ sphinx-rtd-theme
 patsy
 geos
 xlrd
-XlsxWriter
+XlsxWriter==1.1.2
 psutil
