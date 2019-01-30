@@ -8,7 +8,7 @@ coverage
 Sphinx
 twine
 numpy
-pandas
+pandas==0.24.0
 plotly
 statsmodels
 sklearn
