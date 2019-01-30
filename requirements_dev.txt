@@ -12,7 +12,7 @@ pandas
 plotly
 statsmodels
 sklearn
-scipy
+scipy==1.2.0
 Shapely
 colorlover
 sphinx-rtd-theme
