@@ -17,7 +17,7 @@ Shapely
 colorlover
 sphinx-rtd-theme
 patsy
-geos
+geos==0.2.1
 xlrd
 XlsxWriter
 psutil
