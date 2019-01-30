@@ -16,7 +16,7 @@ scipy
 Shapely
 colorlover
 sphinx-rtd-theme
-patsy
+patsy==0.5.1
 geos
 xlrd
 XlsxWriter
