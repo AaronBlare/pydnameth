@@ -10,7 +10,7 @@ twine
 numpy
 pandas
 plotly
-statsmodels
+statsmodels==0.9.0
 sklearn
 scipy
 Shapely
