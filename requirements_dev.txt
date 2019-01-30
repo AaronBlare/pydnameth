@@ -9,7 +9,7 @@ Sphinx
 twine
 numpy
 pandas
-plotly
+plotly==3.5.0
 statsmodels
 sklearn
 scipy
