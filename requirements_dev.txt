@@ -7,7 +7,7 @@ tox
 coverage
 Sphinx
 twine
-numpy
+numpy==1.16.0
 pandas
 plotly
 statsmodels
