@@ -15,7 +15,7 @@ sklearn
 scipy
 Shapely
 colorlover
-sphinx-rtd-theme
+sphinx-rtd-theme==0.4.2
 patsy
 geos
 xlrd
