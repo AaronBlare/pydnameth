@@ -13,7 +13,7 @@ plotly
 statsmodels
 sklearn
 scipy
-Shapely
+Shapely==1.6.4.post2
 colorlover
 sphinx-rtd-theme
 patsy
