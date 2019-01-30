@@ -14,7 +14,7 @@ statsmodels
 sklearn
 scipy
 Shapely
-colorlover
+colorlover==0.3.0
 sphinx-rtd-theme
 patsy
 geos
