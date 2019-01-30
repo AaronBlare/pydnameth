@@ -20,4 +20,4 @@ patsy
 geos
 xlrd
 XlsxWriter
-psutil
+psutil==5.5.0
