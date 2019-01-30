@@ -18,6 +18,6 @@ colorlover
 sphinx-rtd-theme
 patsy
 geos
-xlrd
+xlrd==1.2.0
 XlsxWriter
 psutil
