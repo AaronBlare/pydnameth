@@ -15,6 +15,7 @@ from pydnameth.config.attributes.subset import subset_attributes
 from pydnameth.config.attributes.subset import subset_cells
 from pydnameth.config.common import CommonTypes
 
+
 class TestLoadAnnotations(unittest.TestCase):
 
     def setUp(self):
