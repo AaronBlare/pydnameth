@@ -13,7 +13,7 @@ from pydnameth.config.attributes.subset import pass_indexes
 from pydnameth.config.attributes.subset import get_indexes
 from pydnameth.config.attributes.subset import subset_attributes
 from pydnameth.config.attributes.subset import subset_cells
-
+from pydnameth.config.common import CommonTypes
 
 class TestLoadAnnotations(unittest.TestCase):
 
@@ -121,6 +121,24 @@ class TestLoadAnnotations(unittest.TestCase):
         self.config.attributes_indexes = list(range(5))
         subset_cells(self.config)
         self.assertEqual(self.config.cells_dict['CD8T'], [0, 0, 0.006011666, 0, 0])
+
+    def test_incorrect_variable(self):
+        self.config.attributes_dict = load_attributes_dict(self.config)
+        self.assertRaises(ValueError, pass_indexes, self.config, 'age', 100, CommonTypes.any.value)
+
+    def test_len_list_pass_indexes(self):
+        self.config.attributes_dict = load_attributes_dict(self.config)
+        self.assertEqual(len(pass_indexes(self.config, 'age', 18, CommonTypes.any.value)), 19)
+
+    def test_incorrect_observables(self):
+        self.config.attributes_dict = load_attributes_dict(self.config)
+        self.config.attributes.observables.types = {'some_obs': ''}
+        self.assertRaises(ValueError, get_indexes, self.config)
+
+    def test_get_indexes_age_and_m(self):
+        self.config.attributes_dict = load_attributes_dict(self.config)
+        self.config.attributes.observables.types = {'age': [20, 21, 22], 'gender': 'M'}
+        self.assertEqual(len(get_indexes(self.config)), 14)
 
 
 if __name__ == '__main__':
