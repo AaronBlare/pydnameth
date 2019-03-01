@@ -15,6 +15,7 @@ from pydnameth.config.annotations.conditions import gene_region_condition
 from pydnameth.config.annotations.conditions import probe_class_condition
 from pydnameth.config.annotations.conditions import check_conditions
 from pydnameth.config.annotations.conditions import cross_reactive_condition
+from pydnameth.config.annotations.conditions import chromosome_condition
 
 
 class TestAnnotationsConditions(unittest.TestCase):
@@ -160,6 +161,68 @@ class TestAnnotationsConditions(unittest.TestCase):
         condition2 = cross_reactive_condition(self.config, annotations_dict)
 
         self.assertEqual(True, condition1 and condition2)
+
+    def test_considered_NS_chr(self):
+        annotations_dict = {AnnotationKey.chr.value: 'NS'}
+
+        condition = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_exclude_XY_chr(self):
+        annotations_dict = {AnnotationKey.chr.value: 'X'}
+
+        condition1 = chromosome_condition(self.config, annotations_dict)
+
+        annotations_dict = {AnnotationKey.chr.value: 'Y'}
+
+        condition2 = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition1 or condition2)
+
+    def test_considered_X_chr(self):
+        self.config.annotations.chr = 'X'
+        annotations_dict = {AnnotationKey.chr.value: 'X'}
+
+        condition = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_considered_Y_chr(self):
+        self.config.annotations.chr = 'Y'
+        annotations_dict = {AnnotationKey.chr.value: 'Y'}
+
+        condition = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_exclude_X_chr(self):
+        self.config.annotations.chr = 'Y'
+        annotations_dict = {AnnotationKey.chr.value: 'X'}
+
+        condition = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition)
+
+    def test_exclude_Y_chr(self):
+        self.config.annotations.chr = 'X'
+        annotations_dict = {AnnotationKey.chr.value: 'Y'}
+
+        condition = chromosome_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition)
+
+    def test_considered_any_chr(self):
+        self.config.annotations.chr = 'any'
+        annotations_dict1 = {AnnotationKey.chr.value: 'Y'}
+        annotations_dict2 = {AnnotationKey.chr.value: 'Y'}
+        annotations_dict3 = {AnnotationKey.chr.value: 'NS'}
+
+        condition1 = chromosome_condition(self.config, annotations_dict1)
+        condition2 = chromosome_condition(self.config, annotations_dict2)
+        condition3 = chromosome_condition(self.config, annotations_dict3)
+
+        self.assertEqual(True, condition1 and condition2 and condition3)
 
 
 if __name__ == '__main__':
