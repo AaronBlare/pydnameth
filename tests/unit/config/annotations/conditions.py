@@ -14,6 +14,7 @@ from pydnameth.config.annotations.conditions import snp_condition
 from pydnameth.config.annotations.conditions import gene_region_condition
 from pydnameth.config.annotations.conditions import probe_class_condition
 from pydnameth.config.annotations.conditions import check_conditions
+from pydnameth.config.annotations.conditions import cross_reactive_condition
 
 
 class TestAnnotationsConditions(unittest.TestCase):
@@ -133,6 +134,32 @@ class TestAnnotationsConditions(unittest.TestCase):
         condition2 = check_conditions(self.config, annotations_dict)
 
         self.assertEqual((True, False), (condition1, condition2))
+
+    def test_exclude_cross_r_cpg(self):
+        annotations_dict = {AnnotationKey.cross_reactive.value: 1}
+
+        condition = cross_reactive_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition)
+
+    def test_considered_cross_r_cpg(self):
+        annotations_dict = {AnnotationKey.cross_reactive.value: 0}
+
+        condition = cross_reactive_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_considered_any_cross_r(self):
+        self.config.annotations.cross_reactive = 'any'
+        annotations_dict = {AnnotationKey.cross_reactive.value: 0}
+
+        condition1 = cross_reactive_condition(self.config, annotations_dict)
+
+        annotations_dict = {AnnotationKey.cross_reactive.value: 1}
+
+        condition2 = cross_reactive_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition1 and condition2)
 
 
 if __name__ == '__main__':
