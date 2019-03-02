@@ -16,6 +16,7 @@ from pydnameth.config.annotations.conditions import probe_class_condition
 from pydnameth.config.annotations.conditions import check_conditions
 from pydnameth.config.annotations.conditions import cross_reactive_condition
 from pydnameth.config.annotations.conditions import chromosome_condition
+from pydnameth.config.annotations.conditions import geo_condition
 
 
 class TestAnnotationsConditions(unittest.TestCase):
@@ -223,6 +224,77 @@ class TestAnnotationsConditions(unittest.TestCase):
         condition3 = chromosome_condition(self.config, annotations_dict3)
 
         self.assertEqual(True, condition1 and condition2 and condition3)
+
+    def test_considered_any_geo(self):
+        annotations_dict1 = {AnnotationKey.geo.value: "N_Shore"}
+        annotations_dict2 = {AnnotationKey.geo.value: "S_Shore"}
+        annotations_dict3 = {AnnotationKey.geo.value: "Island"}
+        annotations_dict4 = {AnnotationKey.geo.value: "S_Shelf"}
+
+        condition1 = geo_condition(self.config, annotations_dict1)
+        condition2 = geo_condition(self.config, annotations_dict2)
+        condition3 = geo_condition(self.config, annotations_dict3)
+        condition4 = geo_condition(self.config, annotations_dict4)
+
+        self.assertEqual(True, condition1 and condition2 and condition3 and condition4)
+
+    def test_considered_shores_geo(self):
+        self.config.annotations.geo = "shores"
+        annotations_dict1 = {AnnotationKey.geo.value: "N_Shore"}
+        annotations_dict2 = {AnnotationKey.geo.value: "S_Shore"}
+
+        condition1 = geo_condition(self.config, annotations_dict1)
+        condition2 = geo_condition(self.config, annotations_dict2)
+
+        self.assertEqual(True, condition1 and condition2)
+
+    def test_considered_shores_s_geo(self):
+        self.config.annotations.geo = "shores_s"
+        annotations_dict = {AnnotationKey.geo.value: "S_Shore"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_considered_shores_n_geo(self):
+        self.config.annotations.geo = "shores_n"
+        annotations_dict = {AnnotationKey.geo.value: "N_Shore"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_considered_islands_geo(self):
+        self.config.annotations.geo = "islands"
+        annotations_dict = {AnnotationKey.geo.value: "Island"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_considered_islands_shores_geo(self):
+        self.config.annotations.geo = "islands_shores"
+        annotations_dict = {AnnotationKey.geo.value: "Island"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(True, condition)
+
+    def test_exclude_islands_for_shore_geo(self):
+        self.config.annotations.geo = "shores"
+        annotations_dict = {AnnotationKey.geo.value: "islands"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition)
+
+    def test_exclude_islands_shores_for_shore_geo(self):
+        self.config.annotations.geo = "shores"
+        annotations_dict = {AnnotationKey.geo.value: "Island"}
+
+        condition = geo_condition(self.config, annotations_dict)
+
+        self.assertEqual(False, condition)
 
 
 if __name__ == '__main__':
