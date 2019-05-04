@@ -15,6 +15,7 @@ from pydnameth.model.strategy.get import ResidualsCommonGetStrategy
 from pydnameth.model.strategy.get import ResidualsSpecialGetStrategy
 from pydnameth.model.strategy.get import EpimutationsGetStrategy
 from pydnameth.model.strategy.get import EntropyGetStrategy
+from pydnameth.model.strategy.get import GenesGetStrategy
 from pydnameth.model.strategy.setup import TableSetUpStrategy
 from pydnameth.model.strategy.setup import ClockSetUpStrategy
 from pydnameth.model.strategy.setup import PlotSetUpStrategy
@@ -74,6 +75,8 @@ class Context:
             self.get_strategy = EpimutationsGetStrategy()
         elif config.experiment.data == DataType.entropy:
             self.get_strategy = EntropyGetStrategy()
+        elif config.experiment.data == DataType.genes:
+            self.get_strategy = GenesGetStrategy()
 
         if config.experiment.task == Task.table:
             self.setup_strategy = TableSetUpStrategy(self.get_strategy)

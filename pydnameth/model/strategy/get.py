@@ -114,3 +114,15 @@ class ObservablesGetStrategy(GetStrategy):
 
     def get_aux(self, config, item):
         pass
+
+
+class GenesGetStrategy(GetStrategy):
+
+    def get_single_base(self, config, items):
+        return BetasGetStrategy.get_single_base(self, config, items)
+
+    def get_aux(self, config, item):
+        aux = ''
+        if item in config.gene_cpg_dict:
+            aux = ';'.join(config.gene_cpg_dict[item])
+        return aux
