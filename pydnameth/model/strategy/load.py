@@ -7,6 +7,7 @@ from pydnameth.infrastucture.load.residuals_common import load_residuals_common
 from pydnameth.infrastucture.load.table import load_table_dict
 from pydnameth.infrastucture.load.epimutations import load_epimutations
 from pydnameth.infrastucture.load.entropy import load_entropy
+from pydnameth.infrastucture.load.genes import load_genes
 
 
 class LoadStrategy(metaclass=abc.ABCMeta):
@@ -120,3 +121,19 @@ class ObservablesLoadStrategy(LoadStrategy):
 
     def load(self, config, configs_child):
         pass
+
+
+class GenesLoadStrategy(LoadStrategy):
+
+    def load(self, config, configs_child):
+        load_genes(config)
+        config.base_list = config.gene_list
+        config.base_dict = config.gene_dict
+        config.base_data = config.gene_data
+
+        self.inherit_childs(config, configs_child)
+
+        if config.is_load_child:
+
+            for config_child in configs_child:
+                self.load_child(config_child)

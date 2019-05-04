@@ -6,6 +6,7 @@ from pydnameth.model.strategy.load import ResidualsCommonLoadStrategy
 from pydnameth.model.strategy.load import ResidualsSpecialLoadStrategy
 from pydnameth.model.strategy.load import EpimutationsLoadStrategy
 from pydnameth.model.strategy.load import EntropyLoadStrategy
+from pydnameth.model.strategy.load import GenesLoadStrategy
 from pydnameth.model.strategy.get import BetasGetStrategy
 from pydnameth.model.strategy.get import BetasAdjGetStrategy
 from pydnameth.model.strategy.get import BetasHorvathCalculatorGetStrategy
@@ -54,6 +55,8 @@ class Context:
             self.load_strategy = EpimutationsLoadStrategy()
         elif config.experiment.data == DataType.entropy:
             self.load_strategy = EntropyLoadStrategy()
+        elif config.experiment.data == DataType.genes:
+            self.load_strategy = GenesLoadStrategy()
 
         if config.experiment.data == DataType.betas:
             self.get_strategy = BetasGetStrategy()
