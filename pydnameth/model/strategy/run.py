@@ -42,7 +42,7 @@ class TableRunStrategy(RunStrategy):
     def single(self, item, config, configs_child):
 
         if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common,
-                                      DataType.residuals_special]:
+                                      DataType.residuals_special, DataType.genes]:
 
             if config.experiment.method == Method.linreg:
 
@@ -439,7 +439,7 @@ class ClockRunStrategy(RunStrategy):
     def run(self, config, configs_child):
 
         if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common,
-                                      DataType.residuals_special]:
+                                      DataType.residuals_special, DataType.genes]:
 
             if config.experiment.method == Method.linreg:
 
@@ -530,7 +530,7 @@ class PlotRunStrategy(RunStrategy):
     def run(self, config, configs_child):
 
         if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common,
-                                      DataType.residuals_special]:
+                                      DataType.residuals_special, DataType.genes]:
 
             if config.experiment.method == Method.scatter:
 
