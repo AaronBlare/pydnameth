@@ -17,7 +17,8 @@ class TableReleaseStrategy(ReleaseStrategy):
 
     def release(self, config, configs_child):
 
-        if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common, DataType.residuals_special]:
+        if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common,
+                                      DataType.residuals_special, DataType.genes]:
 
             if config.experiment.method == Method.z_test_linreg:
                 reject, pvals_corr, alphacSidak, alphacBonf = multipletests(config.metrics['p_value'],
@@ -36,12 +37,9 @@ class PlotReleaseStrategy(ReleaseStrategy):
 
     def release(self, config, configs_child):
 
-        if config.experiment.data in [
-            DataType.betas,
-            DataType.betas_adj,
-            DataType.residuals_common,
-            DataType.residuals_special, DataType.entropy
-        ]:
+        if config.experiment.data in [DataType.betas, DataType.betas_adj, DataType.residuals_common,
+                                      DataType.residuals_special, DataType.entropy, DataType.genes]:
+
             if config.experiment.method == Method.scatter:
 
                 layout = plot_routines.get_layout(config)
