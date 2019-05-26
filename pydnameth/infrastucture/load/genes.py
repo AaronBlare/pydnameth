@@ -40,23 +40,22 @@ def load_genes(config):
 
         f = open(fn_txt)
         header_line = f.readline()
-        headers = header_line.split('\t')
+        headers = header_line.split()
         headers = [x.rstrip() for x in headers]
         subjects = headers[1:len(headers)]
 
         config.gene_data = np.zeros((len(config.gene_list), len(subjects)), dtype=np.float32)
 
-        gene_id = 0
         for line in tqdm(f, mininterval=60.0, desc='gene_data creating'):
             line_list = get_line_list(line)
             curr_cpg_name = line_list[0]
             curr_data = list(map(np.float32, line_list[1::]))
 
-            for gene in config.cpg_gene_dict[curr_cpg_name]:
-                line_num = config.gene_dict[gene]
-                config.gene_data[line_num] += curr_data
+            if curr_cpg_name in config.cpg_gene_dict:
+                for gene in config.cpg_gene_dict[curr_cpg_name]:
+                    line_num = config.gene_dict[gene]
+                    config.gene_data[line_num] += curr_data
 
-            gene_id += 1
         f.close()
 
         for row_id, row in enumerate(config.gene_data):
