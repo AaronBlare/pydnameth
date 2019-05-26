@@ -43,6 +43,19 @@ from pydnameth.scripts.develop.epimutations.plot import \
 from pydnameth.scripts.develop.entropy.plot import \
     entropy_plot_scatter
 
+from pydnameth.scripts.develop.genes.table import \
+    genes_table_aggregator_linreg,\
+    genes_table_aggregator_variance,\
+    genes_table_linreg,\
+    genes_table_cluster
+from pydnameth.scripts.develop.genes.clock import \
+    genes_clock_linreg,\
+    genes_clock_special
+from pydnameth.scripts.develop.genes.plot import \
+    genes_plot_scatter,\
+    genes_plot_curve_clock,\
+    genes_plot_variance_histogram_dev
+
 from pydnameth.scripts.develop.observables.plot import \
     observables_plot_histogram
 
