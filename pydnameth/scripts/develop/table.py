@@ -1,7 +1,7 @@
 import copy
 from anytree import Node
 from pydnameth.config.config import Config
-from pydnameth.config.experiment.types import DataType, Task, Method
+from pydnameth.config.experiment.types import Task, Method
 from pydnameth.config.experiment.experiment import Experiment
 from pydnameth.config.attributes.attributes import Observables, Cells, Attributes
 from pydnameth.model.tree import build_tree, calc_tree
@@ -223,7 +223,7 @@ def table_aggregator_variance(
     config_cluster = Config(
         data=copy.deepcopy(data),
         experiment=Experiment(
-            data=DataType.betas,
+            data=data_type,
             task=Task.table,
             method=Method.cluster,
             method_params={

@@ -16,6 +16,10 @@ def genes_clock_linreg(
     attributes,
     method_params=None
 ):
+    """
+        Temporary description
+    """
+
     config_root = Config(
         data=copy.deepcopy(data),
         experiment=Experiment(
@@ -58,7 +62,7 @@ def genes_clock_special(
     method_params=None,
 ):
     """
-        Description
+        Temporary description
     """
 
     if os.path.isfile(file):

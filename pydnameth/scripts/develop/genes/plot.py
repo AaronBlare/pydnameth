@@ -18,20 +18,7 @@ def genes_plot_scatter(
     method_params=None
 ):
     """
-    Plotting methylation level from observables as scatter for provided subjects subsets and provided CpG list.
-
-    Possible parameters of experiment:
-
-     * ``'x_range'``: can be ``'auto'`` or list with two elements, which are borders of target axis.
-     * ...
-
-    :param data: pdm.Data instance, which specifies information about dataset.
-    :param annotations: pdm.Annotations instance, which specifies subset of CpGs.
-    :param attributes: pdm.Attributes instance, which specifies information about subjects.
-    :param cpg_list: List of CpGs for plotting
-    :param observables_list: list of subjects subsets. Each element in list is dict,
-     where ``key`` is observable name and ``value`` is possible values for this observable.
-    :param method_params: parameters of experiment.
+        Temporary description
     """
 
     plot_scatter(
@@ -55,6 +42,10 @@ def genes_plot_curve_clock(
     data_params=None,
     method_params=None
 ):
+    """
+        Temporary description
+    """
+
     data_type = DataType.genes
 
     clock_method_params = {
