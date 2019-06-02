@@ -13,16 +13,16 @@ def load_genes(config):
     if bool(config.experiment.data_params):
         suffix += '_' + str(config.experiment.get_data_params_str())
 
-    fn_txt = get_data_base_path(config) + '/' + 'betas' + suffix + '.txt'
-    fn_npz = get_data_base_path(config) + '/' + 'gene' + suffix + '.npz'
+    fn__betas_txt = get_data_base_path(config) + '/' + 'betas' + suffix + '.txt'
+    fn_genes_npz = get_data_base_path(config) + '/' + 'gene' + suffix + '.npz'
 
-    if os.path.isfile(fn_dict) and os.path.isfile(fn_npz):
+    if os.path.isfile(fn_dict) and os.path.isfile(fn_genes_npz):
 
         f = open(fn_dict, 'rb')
         config.gene_dict = pickle.load(f)
         f.close()
 
-        data = np.load(fn_npz)
+        data = np.load(fn_genes_npz)
         config.gene_data = data['data']
 
     else:
@@ -38,7 +38,7 @@ def load_genes(config):
         pickle.dump(config.gene_dict, f, pickle.HIGHEST_PROTOCOL)
         f.close()
 
-        f = open(fn_txt)
+        f = open(fn__betas_txt)
         header_line = f.readline()
         headers = header_line.split()
         headers = [x.rstrip() for x in headers]
@@ -61,4 +61,4 @@ def load_genes(config):
         for row_id, row in enumerate(config.gene_data):
             config.gene_data[row_id] /= len(config.gene_cpg_dict[config.gene_list[row_id]])
 
-        np.savez_compressed(fn_npz, data=config.gene_data)
+        np.savez_compressed(fn_genes_npz, data=config.gene_data)
