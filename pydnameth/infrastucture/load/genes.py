@@ -1,4 +1,5 @@
 from pydnameth.infrastucture.path import get_data_base_path
+from pydnameth.infrastucture.path import get_cache_path
 import numpy as np
 import os.path
 import pickle
@@ -7,14 +8,14 @@ from pydnameth.infrastucture.load.betas import get_line_list
 
 
 def load_genes(config):
-    fn_dict = get_data_base_path(config) + '/' + 'gene_dict.pkl'
+    fn_dict = get_cache_path(config) + '/' + 'gene_dict.pkl'
 
     suffix = ''
     if bool(config.experiment.data_params):
         suffix += '_' + str(config.experiment.get_data_params_str())
 
     fn__betas_txt = get_data_base_path(config) + '/' + 'betas' + suffix + '.txt'
-    fn_genes_npz = get_data_base_path(config) + '/' + 'gene' + suffix + '.npz'
+    fn_genes_npz = get_cache_path(config) + '/' + 'gene' + suffix + '.npz'
 
     if os.path.isfile(fn_dict) and os.path.isfile(fn_genes_npz):
 
