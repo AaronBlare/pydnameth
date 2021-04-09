@@ -15,7 +15,7 @@ sklearn==0.0
 scipy==1.6.1
 Shapely==1.7.1
 colorlover==0.3.0
-sphinx-rtd-theme==0.5.1
+sphinx-rtd-theme==0.5.2
 patsy==0.5.1
 geos==0.2.3
 xlrd==2.0.1
