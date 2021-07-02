@@ -9,7 +9,7 @@ Sphinx==3.5.1
 twine==3.3.0
 numpy==1.20.1
 pandas==1.2.2
-plotly==4.14.3
+plotly==5.1.0
 statsmodels==0.12.2
 sklearn==0.0
 scipy==1.6.1
